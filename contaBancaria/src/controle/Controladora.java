@@ -1,4 +1,5 @@
 package controle;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
 import javax.swing.JOptionPane;
@@ -9,6 +10,7 @@ import visualizacao.EntradaSaida;
 
 public class Controladora {
     Conta conta = new Conta();
+	static DecimalFormat df = new DecimalFormat("#0.00");
 
     public void exibeMenu(){
 
@@ -38,7 +40,7 @@ public class Controladora {
 				
 				this.conta.fazerDeposito(deposito, movimentacaoDeposito);
 
-				EntradaSaida.mostrarInfoDeposito(deposito);
+				JOptionPane.showMessageDialog(null, "Você depositou: R$" + df.format(deposito));
 
 				break;
 
@@ -46,7 +48,7 @@ public class Controladora {
 				double saque = EntradaSaida.solicitaInformacoesSaque();
 				while (saque <= 0) {
 					JOptionPane.showMessageDialog(null, "Valor inválido!");
-					saque = EntradaSaida.solicitaInformacoesSaque();
+					saque =	 EntradaSaida.solicitaInformacoesSaque();
 				}
 
 				Movimentacao movimentacaoSaque = new Movimentacao();
@@ -60,7 +62,7 @@ public class Controladora {
 					JOptionPane.showMessageDialog(null, "Saque não permitido, limite maximo negativo atingido: -R$1.000");
 				} else {
 					this.conta.fazerSaque(saque, movimentacaoSaque);
-					EntradaSaida.mostrarInfoSaque(saque);
+					JOptionPane.showMessageDialog(null, "Voçê sacou: R$" + df.format(saque));
 				}
 				break;
             }

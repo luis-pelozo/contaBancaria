@@ -1,13 +1,10 @@
 package visualizacao;
-
-import java.text.DecimalFormat;
-
+//import java.text.DecimalFormat;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 public class EntradaSaida {
-
-  static DecimalFormat df = new DecimalFormat("#0.00");
+  //static DecimalFormat df = new DecimalFormat("#0.00");
 
     public static int solicitaOpcao(){
 		String[] opcoes = {"Depósito", "Saque", "Ver Saldo","Imprimir extrato","Informações da Conta","Sair "};
@@ -25,8 +22,8 @@ public class EntradaSaida {
 		return menu.getSelectedIndex();
 	}
 
-  public static String solicitaTitular() {
-		return JOptionPane.showInputDialog(null, "Informe o nome do TITULAR",JOptionPane.INFORMATION_MESSAGE);
+  public static String solicitaTitular() {			
+		return	 JOptionPane.showInputDialog("Informe o nome do TITULAR");		
 	}
 
   public static int solicitarTipoDaConta() {		
@@ -69,15 +66,6 @@ public class EntradaSaida {
   public static void msgEncerraConsulta(){
 		JOptionPane.showMessageDialog(null, "Obrigado!");		
 	}
-
-  public static void mostrarInfoDeposito(double deposito) {
-		JOptionPane.showMessageDialog(null, "Você depositou: R$" + df.format(deposito));
-	}
-
-  public static void mostrarInfoSaque(double saque) {
-		JOptionPane.showMessageDialog(null, "Voçw sacou: R$" + df.format(saque));
-	}
-
     /*
     solicitarInformacoesDeposito()
     solicitarInformacoesSaque()
