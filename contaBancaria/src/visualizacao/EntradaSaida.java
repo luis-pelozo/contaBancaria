@@ -43,7 +43,7 @@ public class EntradaSaida {
     return Double.parseDouble(JOptionPane.showInputDialog(null, "Informe o valo que deseja sacar"));
   }
 
-  public static void exibirSaldo(String infoSaldo) {
+  public static void mostrarSaldo(String infoSaldo) {
 		JOptionPane.showMessageDialog(null, infoSaldo, "Saldo", JOptionPane.INFORMATION_MESSAGE);
 	}
 

@@ -14,7 +14,7 @@ public class Controladora {
 
     public void exibeMenu(){
 
-        int opcao;
+        int opcao, opcao2;
 		String informacoes;
 		String titular = EntradaSaida.solicitaTitular();
 		int tipo = EntradaSaida.solicitarTipoDaConta();
@@ -28,7 +28,6 @@ public class Controladora {
                 case 0:
                 double deposito = EntradaSaida.solicitaInformacoesDeposito();
 				while (deposito <= 0) {
-					//EntradaSaida.exibirValorInvalido();
                     JOptionPane.showMessageDialog(null, "Valor inválido!");
 					deposito = EntradaSaida.solicitaInformacoesDeposito();
 				}
@@ -36,7 +35,7 @@ public class Controladora {
 
                 movimentacaoDeposito.setData(LocalDateTime.now());
 				movimentacaoDeposito.setValor(deposito);
-				movimentacaoDeposito.setTipo(2); //guardar na poupança
+				movimentacaoDeposito.setTipo(1);
 				
 				this.conta.fazerDeposito(deposito, movimentacaoDeposito);
 
@@ -55,22 +54,65 @@ public class Controladora {
 
                 movimentacaoSaque.setData(LocalDateTime.now());
 				movimentacaoSaque.setValor(saque);
-				movimentacaoSaque.setTipo(1);// sacar pagamento
+				movimentacaoSaque.setTipo(2);
 				
 				
 				if (this.conta.getSaldo() - saque < -1000) {
-					JOptionPane.showMessageDialog(null, "Saque não permitido, limite maximo negativo atingido: -R$1.000");
+					JOptionPane.showMessageDialog(null, "Saque não permitido, limite maximo negativo atingido: - R$1.000");
 				} else {
 					this.conta.fazerSaque(saque, movimentacaoSaque);
-					JOptionPane.showMessageDialog(null, "Voçê sacou: R$" + df.format(saque));
+					JOptionPane.showMessageDialog(null, "Você sacou: R$" + df.format(saque));
 				}
 				break;
+
+				case 2:
+				String infoSaldo = this.conta.verSaldo();
+				EntradaSaida.mostrarSaldo(infoSaldo);
+				break;
+
+				case 3:
+					opcao2 = EntradaSaida.solicitaOpcaoExtrato();
+					switch(opcao2){
+						case 0:
+						if (conta.getListaDeMovimentacao().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "Esta conta ainda não possui movimentações","info",
+							JOptionPane.ERROR_MESSAGE);
+		
+						} else {
+							informacoes = this.conta.gerarExtratoCompleto();
+							EntradaSaida.exibirExtratoCompleto(informacoes);
+						}
+						break;
+						
+						case 1:
+						if (conta.getListaDeMovimentacao().isEmpty()) {
+
+							JOptionPane.showMessageDialog(null, "Esta conta ainda não possui movimentações","info",
+							JOptionPane.ERROR_MESSAGE);
+		
+						} else {
+							informacoes = this.conta.gerarExtratoSaques();
+							EntradaSaida.exibirExtratoDeSaques(informacoes);
+						}
+						break;
+						
+						case 2:
+						if (conta.getListaDeMovimentacao().isEmpty()) {
+
+							JOptionPane.showMessageDialog(null, "Esta conta ainda não possui movimentações","info",
+							JOptionPane.ERROR_MESSAGE);
+						} else {
+							informacoes = this.conta.gerarExtratoDepositos();
+							EntradaSaida.exibirExtratoDeDepositos(informacoes);
+						}
+						break;					
+					}
+				break;
+				case 4:
+				informacoes = this.conta.gerarDadosDaConta();
+				EntradaSaida.exibirDadosDaConta(informacoes);
+				break;
             }
-
-        } while (opcao != 5);
-
-
-
-        
+        } while (opcao != 5);        
     }
 }
