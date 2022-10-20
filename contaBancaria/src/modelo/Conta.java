@@ -94,11 +94,10 @@ public class Conta {
 				infoMovimentacao = "--DEPOSITO--";
 			}
 
-			informacoes += movimentacao.getData() + " - " + infoMovimentacao + "  R$"
-					+ df.format(movimentacao.getValor()) + "\n" 
-					+"Saldo: "+df.format(getSaldo())+ "\n" 
-					+verificaTipoDeConta();
-		}		
+			informacoes +=  infoMovimentacao  +verificaTipoDeConta() + "\n"+ movimentacao.getData() + " - "  + "  R$"
+					+ df.format(movimentacao.getValor()) + "\n" ;
+		}	
+		informacoes += "\n" + "Saldo: " +df.format(getSaldo())+"\n";	
 		return informacoes;
 	}
 
@@ -110,12 +109,11 @@ public class Conta {
 
 			if (tipoMovimentacao == 2) {
 				infoMovimentacao = "--SAQUE--";
-				informacoes += movimentacao.getData() + " - " + infoMovimentacao + "  R$"
-						+ df.format(movimentacao.getValor()) + "\n"
-						+"Saldo: " +df.format(getSaldo())+"\n" 
-						+verificaTipoDeConta();
+				informacoes += infoMovimentacao +verificaTipoDeConta() + "\n" + movimentacao.getData() + " - " +  "  R$"
+						+ df.format(movimentacao.getValor()) + "\n";
 			}			
 		}
+		informacoes += "\n" + "Saldo: " +df.format(getSaldo())+"\n";
 
 		if (informacoes == "") {
 			String semMovimentacao = "Sua conta não possui movimentações de saques!";
@@ -134,12 +132,11 @@ public class Conta {
 
 			if (tipoMovimentacao == 1) {
 				infoMovimentacao = "--DEPOSITO--";
-				informacoes += movimentacao.getData() + " - " + infoMovimentacao + "  R$"
-						+ df.format(movimentacao.getValor()) + "\n"
-						+ "Saldo: " +df.format(getSaldo())+"\n" 
-						+verificaTipoDeConta();
+				informacoes += infoMovimentacao +verificaTipoDeConta() + "\n" + movimentacao.getData() + " - " +  "  R$"
+						+ df.format(movimentacao.getValor()) + "\n";					
 			}
 		}
+		informacoes += "\n" + "Saldo: " +df.format(getSaldo())+"\n";
 
 		if (informacoes == "") {
 			String semMovimentacao = "Sua conta não possui movimentações de depositos!";
@@ -148,7 +145,6 @@ public class Conta {
 			return informacoes;
 		}
 	}
-
 	public String gerarDadosDaConta() {
 
 		String informacoes = "";
