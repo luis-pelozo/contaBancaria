@@ -6,7 +6,7 @@ public class Movimentacao {
     int tipo;
 	double valor;
 	LocalDateTime data = LocalDateTime.now();
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+	DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
 	public int getTipo() {
 		return tipo;
@@ -25,7 +25,7 @@ public class Movimentacao {
 	}
 
 	public String getData() {
-		return data.format(formatter);
+		return data.format(formatar);
 	}
 
 	public void setData(LocalDateTime data) {
