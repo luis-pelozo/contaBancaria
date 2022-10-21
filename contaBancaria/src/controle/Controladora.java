@@ -1,9 +1,7 @@
 package controle;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
-
 import javax.swing.JOptionPane;
-
 import modelo.Conta;
 import modelo.Movimentacao;
 import visualizacao.EntradaSaida;
@@ -32,15 +30,11 @@ public class Controladora {
 					deposito = EntradaSaida.solicitaInformacoesDeposito();
 				}
 				Movimentacao movimentacaoDeposito = new Movimentacao();
-
                 movimentacaoDeposito.setData(LocalDateTime.now());
 				movimentacaoDeposito.setValor(deposito);
-				movimentacaoDeposito.setTipo(1);
-				
-				this.conta.fazerDeposito(deposito, movimentacaoDeposito);
-
+				movimentacaoDeposito.setTipo(1);				
+				this.conta.depositar(deposito, movimentacaoDeposito);
 				JOptionPane.showMessageDialog(null, "Você depositou: R$" + df.format(deposito));
-
 				break;
 
                 case 1:
@@ -49,18 +43,15 @@ public class Controladora {
 					JOptionPane.showMessageDialog(null, "Valor inválido!");
 					saque =	 EntradaSaida.solicitaInformacoesSaque();
 				}
-
 				Movimentacao movimentacaoSaque = new Movimentacao();
-
                 movimentacaoSaque.setData(LocalDateTime.now());
 				movimentacaoSaque.setValor(saque);
-				movimentacaoSaque.setTipo(2);
-				
+				movimentacaoSaque.setTipo(2);			
 				
 				if (this.conta.getSaldo() - saque < -1000) {
 					JOptionPane.showMessageDialog(null, "Saque não permitido, limite maximo negativo atingido: - R$1.000");
 				} else {
-					this.conta.fazerSaque(saque, movimentacaoSaque);
+					this.conta.sacar(saque, movimentacaoSaque);
 					JOptionPane.showMessageDialog(null, "Você sacou: R$" + df.format(saque));
 				}
 				break;
@@ -86,7 +77,6 @@ public class Controladora {
 						
 						case 1:
 						if (conta.getListaDeMovimentacao().isEmpty()) {
-
 							JOptionPane.showMessageDialog(null, "Esta conta ainda não possui movimentações","info",
 							JOptionPane.ERROR_MESSAGE);
 		
@@ -98,7 +88,6 @@ public class Controladora {
 						
 						case 2:
 						if (conta.getListaDeMovimentacao().isEmpty()) {
-
 							JOptionPane.showMessageDialog(null, "Esta conta ainda não possui movimentações","info",
 							JOptionPane.ERROR_MESSAGE);
 						} else {
@@ -108,11 +97,14 @@ public class Controladora {
 						break;					
 					}
 				break;
+				
 				case 4:
 				informacoes = this.conta.gerarDadosDaConta();
 				EntradaSaida.exibirDadosDaConta(informacoes);
 				break;
             }
-        } while (opcao != 5);        
+        } while (opcao!=5);
+		EntradaSaida.msgEncerraConsulta();
+		System.exit(0);       
     }
 }

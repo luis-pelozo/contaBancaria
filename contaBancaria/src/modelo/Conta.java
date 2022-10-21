@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 public class Conta {
     private int tipoDeConta;
 	private double saldo;
@@ -21,7 +20,6 @@ public class Conta {
 	}
 
     public int getTipoDeConta() {
-
 		return tipoDeConta;
 	}
 
@@ -37,26 +35,20 @@ public class Conta {
 		this.saldo = saldo;
 	}       
 
-
-    public void fazerDeposito(double deposito, Movimentacao movimentacao) {
-		listaDeMovimentacao.add(movimentacao);
+	public void depositar(double deposito, Movimentacao movimentacao) {		
 		saldo = saldo + deposito;
-	}
-
-    public void fazerSaque(double saque, Movimentacao movimentacao) {
-
 		listaDeMovimentacao.add(movimentacao);
+	}    
+
+    public void sacar(double saque, Movimentacao movimentacao) {
 		saldo = saldo - saque;
+		listaDeMovimentacao.add(movimentacao);
 	}
 
 	public String verSaldo() {
-
 		String infoSaldo = "";
-
 		infoSaldo += "Saldo atual: R$" + df.format(this.saldo);
-
 		return infoSaldo;
-
 	}
 
 	public ArrayList<Movimentacao> getListaDeMovimentacao() {
@@ -67,13 +59,8 @@ public class Conta {
 		this.listaDeMovimentacao = listaDeMovimentacao;
 	}
 
-	public void depositar(double deposito, Movimentacao movimentacao) {
-		listaDeMovimentacao.add(movimentacao);
-		saldo = saldo + deposito;
-	}
-
 	public String verificaTipoDeConta(){
-		String tipoDaConta ="";
+		String tipoDaConta ="";		
 		if(getTipoDeConta() ==1){
 			tipoDaConta = "Conta Poupança";
 		} else{
@@ -113,7 +100,7 @@ public class Conta {
 						+ df.format(movimentacao.getValor()) + "\n";
 			}			
 		}
-		informacoes += "\n" + "Saldo: " +df.format(getSaldo())+"\n";
+		//informacoes += "\n" + "Saldo: " +df.format(getSaldo())+"\n";
 
 		if (informacoes == "") {
 			String semMovimentacao = "Sua conta não possui movimentações de saques!";
@@ -136,8 +123,7 @@ public class Conta {
 						+ df.format(movimentacao.getValor()) + "\n";					
 			}
 		}
-		informacoes += "\n" + "Saldo: " +df.format(getSaldo())+"\n";
-
+		//informacoes += "\n" + "Saldo: " +df.format(getSaldo())+"\n";
 		if (informacoes == "") {
 			String semMovimentacao = "Sua conta não possui movimentações de depositos!";
 			return semMovimentacao;
@@ -145,8 +131,8 @@ public class Conta {
 			return informacoes;
 		}
 	}
+	
 	public String gerarDadosDaConta() {
-
 		String informacoes = "";
 		int tipoConta = tipoDeConta;
 		LocalDateTime data = LocalDateTime.now();
@@ -160,7 +146,6 @@ public class Conta {
 		}
 		informacoes += "Nome do titular: " + titular + "\n" + "Tipo da conta: " + infoTipo + "\n"
 				+ "Data do acesso: " + data.format(formatter) + "\n" + "Saldo: R$" + df.format(saldo) + "\n";
-
 		return informacoes;
 	}
 }

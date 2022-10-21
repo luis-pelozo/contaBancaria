@@ -2,7 +2,6 @@ package modelo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 public class Movimentacao {
     int tipo;
 	double valor;

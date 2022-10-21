@@ -1,12 +1,10 @@
 package visualizacao;
-//import java.text.DecimalFormat;
+
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-
 public class EntradaSaida {
-  //static DecimalFormat df = new DecimalFormat("#0.00");
 
-    public static int solicitaOpcao(){
+	public static int solicitaOpcao(){
 		String[] opcoes = {"Depósito", "Saque", "Ver Saldo","Imprimir extrato","Informações da Conta","Sair "};
 		JComboBox<String> menu = new JComboBox<String>(opcoes);
 
@@ -14,7 +12,7 @@ public class EntradaSaida {
 		return menu.getSelectedIndex();
 	}
 
-  public static int solicitaOpcaoExtrato(){
+	public static int solicitaOpcaoExtrato(){
 		String[] opcoesExtrato = {"Extrato completo", "Extrato de SAQUE", "Extrato de DEPÓSITO"};
 		JComboBox<String> menu = new JComboBox<String>(opcoesExtrato);
 
@@ -22,40 +20,45 @@ public class EntradaSaida {
 		return menu.getSelectedIndex();
 	}
 
-  public static String solicitaTitular() {			
+	public static String solicitaTitular() {			
 		return	 JOptionPane.showInputDialog("Informe o nome do TITULAR");		
 	}
 
-  public static int solicitarTipoDaConta() {		
-		int tipoConta = Integer.parseInt(
-				JOptionPane.showInputDialog(null, "Conta desejada: "+
-                                                           "\n 1 - Conta Poupança"+
-                                                           "\n 2 - Conta Corrente",
-						"Tipo de conta", JOptionPane.INFORMATION_MESSAGE));
-		return tipoConta;
+	public static int solicitarTipoDaConta() {	
+		int tipoConta =0;	
+		do{
+			tipoConta = Integer.parseInt(
+					JOptionPane.showInputDialog(null, 
+					"Conta desejada: "+
+					"\n 1 - Conta Poupança"+
+					"\n 2 - Conta Corrente",
+			 "Tipo de conta", JOptionPane.INFORMATION_MESSAGE));
+							
+		}while((tipoConta<1)||(tipoConta>2));
+		return tipoConta;		
 	}
 
-  public static double solicitaInformacoesDeposito(){
-    return Double.parseDouble(JOptionPane.showInputDialog(null, "Informe o valor que deseja depositar"));
-  }
+	public static double solicitaInformacoesDeposito(){
+		return Double.parseDouble(JOptionPane.showInputDialog(null, "Informe o valor que deseja depositar"));
+	}
 
-  public static double solicitaInformacoesSaque(){
-    return Double.parseDouble(JOptionPane.showInputDialog(null, "Informe o valo que deseja sacar"));
-  }
+	public static double solicitaInformacoesSaque(){
+		return Double.parseDouble(JOptionPane.showInputDialog(null, "Informe o valo que deseja sacar"));
+	}
 
-  public static void mostrarSaldo(String infoSaldo) {
+	public static void mostrarSaldo(String infoSaldo) {
 		JOptionPane.showMessageDialog(null, infoSaldo, "Saldo", JOptionPane.INFORMATION_MESSAGE);
 	}
 
-  public static void exibirDadosDaConta(String informacoes) {
+	public static void exibirDadosDaConta(String informacoes) {
 		JOptionPane.showMessageDialog(null, informacoes, "Dados Conta", JOptionPane.INFORMATION_MESSAGE);
 	}
 
-  public static void exibirExtratoCompleto(String informacoes) {
+	public static void exibirExtratoCompleto(String informacoes) {
 		JOptionPane.showMessageDialog(null, informacoes, "Extrato completo", JOptionPane.INFORMATION_MESSAGE);
 	}
 
-  public static void exibirExtratoDeDepositos(String informacoes) {
+	public static void exibirExtratoDeDepositos(String informacoes) {
 		JOptionPane.showMessageDialog(null, informacoes, "Extrato de Depositos", JOptionPane.INFORMATION_MESSAGE);
 	}
 
@@ -63,10 +66,10 @@ public class EntradaSaida {
 		JOptionPane.showMessageDialog(null, informacoes, "Extrato de Saques", JOptionPane.INFORMATION_MESSAGE);
 	}
 
-  public static void msgEncerraConsulta(){
-		JOptionPane.showMessageDialog(null, "Obrigado!");		
+	public static void msgEncerraConsulta(){
+		JOptionPane.showMessageDialog(null, "SENAI BANKS agradeçe!" +" \n volte sempre!");		
 	}
-    /*
+/*
     solicitarInformacoesDeposito()
     solicitarInformacoesSaque()
     exibirSaldo()
